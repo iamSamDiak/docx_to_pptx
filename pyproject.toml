@@ -1,0 +1,33 @@
+[project]
+name = "docx-to-pptx"
+version = "1.0.0"
+description = "Convertisseur de documents Word en présentations PowerPoint"
+authors = [
+    {name = "iamSamDiak"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lxml==6.0.2",
+    "pillow==12.0.0",
+    "PyQt5==5.15.11",
+    "PyQt5-Qt5==5.15.17",
+    "PyQt5-sip==12.17.1",
+    "python-docx==1.2.0",
+    "python-pptx==1.0.2",
+    "typing-extensions==4.15.0",
+    "xlsxwriter==3.2.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pyinstaller>=6.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["convert", "gui", "main"]
+py-modules = ["convert", "gui", "main"]
