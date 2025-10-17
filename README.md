@@ -34,7 +34,7 @@ pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=assets/app.ico --c
 choco install innosetup -y
 
 # Créer l'installeur
-iscc setup.iss
+& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
 ```
 
 3. **Récupérer l'installeur**
