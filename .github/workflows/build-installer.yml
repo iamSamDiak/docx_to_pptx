@@ -25,7 +25,7 @@ jobs:
     
     - name: Build executable
       run: |
-        pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.ico main.py
+        pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.ico --hidden-import=PyQt5 --hidden-import=PyQt5.QtCore --hidden-import=PyQt5.QtGui --hidden-import=PyQt5.QtWidgets main.py
     
     - name: Install Inno Setup
       run: choco install innosetup -y
