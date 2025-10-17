@@ -11,38 +11,18 @@ __pycache__/
 *$py.class
 *.so
 
-# Distribution / packaging
-.Python
+# PyInstaller - build artifacts
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+*.spec
 
-# PyInstaller
-*.manifest
-# *.spec  # Garde le fichier .spec personnalisé
+# Inno Setup - build artifacts
+installer/*.exe
 
 # Logs et bases de données
 *.log
 *.sqlite3
 *.db
-
-# Fichiers de test
-.pytest_cache/
-.coverage
-htmlcov/
-*.cover
 
 # Fichiers IDE
 .vscode/
@@ -52,11 +32,9 @@ htmlcov/
 *~
 .DS_Store
 
-# Fichiers de sortie du projet
+# Fichiers de sortie/test du projet
 *.pptx
 *.docx
-Test2.pptx
-new-test.docx
 
 # Fichiers temporaires
 *.tmp
