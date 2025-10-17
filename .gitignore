@@ -36,6 +36,10 @@ installer/*.exe
 *.pptx
 *.docx
 
+# Exception : garde les fichiers de test
+!tests/*.docx
+!tests/*.pptx
+
 # Fichiers temporaires
 *.tmp
 *.temp

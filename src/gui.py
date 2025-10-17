@@ -6,7 +6,7 @@ from PyQt5.QtGui import QFont, QIcon
 import sys
 import io
 from contextlib import redirect_stdout
-from src.convert import Powerpoint
+from convert import Powerpoint
 
 class MainWindow(QMainWindow):
     def __init__(self):
