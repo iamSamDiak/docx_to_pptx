@@ -25,7 +25,7 @@ jobs:
     
     - name: Build executable
       run: |
-        pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.png main.py
+        pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.ico main.py
     
     - name: Install Inno Setup
       run: choco install innosetup -y
