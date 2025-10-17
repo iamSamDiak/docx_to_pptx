@@ -6,12 +6,12 @@ from PyQt5.QtGui import QFont, QIcon
 import sys
 import io
 from contextlib import redirect_stdout
-from convert import Powerpoint
+from src.convert import Powerpoint
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowIcon(QIcon("icons/app.png"))
+        self.setWindowIcon(QIcon("assets/app.png"))
         self.setWindowTitle("DOCX to PPTX Converter")
         self.resize(600, 350)
         

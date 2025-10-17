@@ -18,7 +18,7 @@ cd docx_to_pptx
 
 2. **Lancer le build automatique**
 ```powershell
-.\build.ps1
+.\scripts\build.ps1
 ```
 
 Ou manuellement :
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 pip install pyinstaller
 
 # Créer l'exécutable
-pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml main.py
+pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=assets/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
 
 # Installer Inno Setup
 choco install innosetup -y
@@ -42,10 +42,15 @@ Le fichier `DOCX_to_PPTX_Setup.exe` sera dans le dossier `installer/`
 
 ## 📦 Fichiers essentiels
 
-- `main.py`, `gui.py`, `convert.py` : Code source
+- `src/` : Code source
+  - `main.py` : Point d'entrée
+  - `gui.py` : Interface PyQt5
+  - `convert.py` : Logique de conversion
+- `assets/` : Ressources (icône)
+- `scripts/` : Scripts de build
+  - `build.ps1` : Build PowerShell
+  - `build.bat` : Build CMD
 - `requirements.txt` : Dépendances Python
-- `icons/app.ico` : Icône de l'application
-- `build.ps1` / `build.bat` : Scripts de build
 - `setup.iss` : Configuration Inno Setup
 
 ## 📝 Licence

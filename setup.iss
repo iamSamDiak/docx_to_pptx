@@ -7,11 +7,11 @@ OutputDir=installer
 OutputBaseFilename=DOCX_to_PPTX_Setup
 Compression=lzma
 SolidCompression=yes
-SetupIconFile=icons\app.ico
+SetupIconFile=assets\app.ico
 
 [Files]
 Source: "dist\DOCX to PPTX.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "icons\*"; DestDir: "{app}\icons"; Flags: ignoreversion recursesubdirs
+Source: "assets\*"; DestDir: "{app}\assets"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\DOCX to PPTX"; Filename: "{app}\DOCX to PPTX.exe"

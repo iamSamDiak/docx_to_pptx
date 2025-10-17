@@ -10,7 +10,7 @@ pip install pyinstaller
 echo.
 
 echo [2/4] Creation de l'executable...
-pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml main.py
+pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=assets/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
 echo.
 
 echo [3/4] Verification d'Inno Setup...
