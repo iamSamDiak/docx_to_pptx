@@ -1,0 +1,39 @@
+name: Build Windows Installer
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: Build executable
+      run: |
+        pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.png main.py
+    
+    - name: Install Inno Setup
+      run: choco install innosetup -y
+    
+    - name: Create installer
+      run: iscc setup.iss
+    
+    - name: Upload installer
+      uses: actions/upload-artifact@v3
+      with:
+        name: DOCX_to_PPTX_Setup
+        path: installer/*.exe
