@@ -119,9 +119,3 @@ class Powerpoint:
         """ Exporte le fichier Powerpoint """
         self.pptx.save("Test2.pptx")
         print("Powerpoint exporté")
-
-pw = Powerpoint()
-pw.open("Un test.docx")
-pw.get_text()
-pw.to_pptx()
-pw.save()
