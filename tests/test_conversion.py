@@ -17,13 +17,8 @@ def test_conversion():
     print("=== Test de conversion DOCX -> PPTX ===\n")
     
     # Chemin du fichier de test
-    docx_file = os.path.join(os.path.dirname(__file__), "Un test.docx")
-    pptx_file = os.path.join(os.path.dirname(__file__), "Test2.pptx")
-    
-    # Vérifie que le fichier existe
-    if not os.path.exists(docx_file):
-        print(f"❌ Fichier introuvable : {docx_file}")
-        return False
+    docx_file = os.path.join(os.path.dirname(__file__), "test.docx")
+    pptx_file = os.path.join(os.path.dirname(__file__), "test.pptx")
     
     # Conversion
     pw = Powerpoint()
