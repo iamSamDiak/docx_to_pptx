@@ -25,7 +25,7 @@ jobs:
     
     - name: Build executable
       run: |
-        pyinstaller docx_to_pptx.spec
+        pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=icons/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml --hidden-import=PIL main.py
     
     - name: Install Inno Setup
       run: choco install innosetup -y
