@@ -6,7 +6,14 @@ from PyQt5.QtGui import QFont, QIcon
 import sys
 import io
 from contextlib import redirect_stdout
-from src.convert import Powerpoint
+
+try:
+    from src.convert import Powerpoint
+except ModuleNotFoundError:
+    from convert import Powerpoint
+
+if getattr(sys, 'frozen', False):
+    import pyi_splash
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -161,6 +168,9 @@ class MainWindow(QMainWindow):
         
         # Variable pour stocker l'objet Powerpoint
         self.pptx_obj = None
+
+        if getattr(sys, 'frozen', False):
+            pyi_splash.close()
     
     def update_button_states(self):
         """Met à jour l'état des boutons selon le contenu du champ de texte"""
