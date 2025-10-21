@@ -38,7 +38,7 @@ choco install innosetup -y
 ```
 
 3. **Récupérer l'installeur**
-Le fichier `DOCX_to_PPTX_Setup.exe` sera dans le dossier `installer/`
+Le fichier `setup.exe` sera dans le dossier `installer/`
 
 ## 📦 Fichiers essentiels
 
