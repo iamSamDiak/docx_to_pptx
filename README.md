@@ -1,4 +1,4 @@
-# DOCX to PPTX Converter
+# EcoDim
 
 Convertisseur de documents Word (.docx) en présentations PowerPoint (.pptx) avec interface graphique moderne.
 
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 pip install pyinstaller
 
 # Créer l'exécutable
-pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=assets/app.ico --splash=assets/splash.png --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
+pyinstaller --onefile --windowed --name="EcoDim" --icon=assets/app.ico --splash=assets/splash.png --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
 
 # Installer Inno Setup (si non installé)
 choco install innosetup -y

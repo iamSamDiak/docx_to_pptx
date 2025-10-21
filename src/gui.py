@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowIcon(QIcon("assets/app.png"))
-        self.setWindowTitle("DOCX to PPTX Converter")
+        self.setWindowTitle("EcoDim")
         self.resize(600, 350)
         
         # Style moderne inspiré du design Google Calendar
