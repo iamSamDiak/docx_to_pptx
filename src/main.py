@@ -6,11 +6,11 @@ except ModuleNotFoundError:
 from PyQt5.QtWidgets import QApplication
 import sys
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
-    window.setWindowTitle(f"DOCX to PPTX Converter v{__version__}")
+    window.setWindowTitle(f"EcoDim v{__version__}")
     window.show()
     sys.exit(app.exec_())

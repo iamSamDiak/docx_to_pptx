@@ -12,11 +12,14 @@ try:
 except ModuleNotFoundError:
     from convert import Powerpoint
 
+if getattr(sys, 'frozen', False):
+    import pyi_splash
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowIcon(QIcon("assets/app.png"))
-        self.setWindowTitle("DOCX to PPTX Converter")
+        self.setWindowTitle("EcoDim")
         self.resize(600, 350)
         
         # Style moderne inspiré du design Google Calendar
@@ -165,6 +168,9 @@ class MainWindow(QMainWindow):
         
         # Variable pour stocker l'objet Powerpoint
         self.pptx_obj = None
+
+        if getattr(sys, 'frozen', False):
+            pyi_splash.close()
     
     def update_button_states(self):
         """Met à jour l'état des boutons selon le contenu du champ de texte"""
