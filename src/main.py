@@ -1,4 +1,8 @@
-from src.gui import MainWindow
+try:
+    from src.gui import MainWindow
+except ModuleNotFoundError:
+    from gui import MainWindow
+    
 from PyQt5.QtWidgets import QApplication
 import sys
 
