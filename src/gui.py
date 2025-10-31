@@ -1,16 +1,17 @@
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QPushButton, QLineEdit, QFileDialog, 
-                             QMessageBox, QLabel, QStyle)
-from PyQt5.QtCore import Qt
+                             QMessageBox, QLabel, QStyle, QMenuBar, QAction, 
+                             QDialog, QDialogButtonBox, QFormLayout, QSpinBox)
+from PyQt5.QtCore import Qt, QSettings
 from PyQt5.QtGui import QFont, QIcon
 import sys
 import io
 from contextlib import redirect_stdout
 
 try:
-    from src.convert import Powerpoint
+    from src.convert import to_powerpoint
 except ModuleNotFoundError:
-    from convert import Powerpoint
+    from convert import to_powerpoint
 
 if getattr(sys, 'frozen', False):
     import pyi_splash
@@ -19,8 +20,17 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowIcon(QIcon("assets/app.png"))
-        self.setWindowTitle("DOCX to PPTX Converter")
+        self.setWindowTitle("EcoDim")
         self.resize(600, 350)
+        
+        # Initialiser QSettings pour la persistance des paramètres
+        self.settings = QSettings("EcoDim", "headline_size")
+        
+        # Charger les paramètres sauvegardés (ou utiliser la valeur par défaut)
+        self.headline_size = float(self.settings.value("headline_size", 16.0))
+        
+        # Créer la barre de menu
+        self.create_menu_bar()
         
         # Style moderne inspiré du design Google Calendar
         self.setStyleSheet("""
@@ -92,6 +102,23 @@ class MainWindow(QMainWindow):
         first_row.addWidget(self.path_input)
         layout.addLayout(first_row)
         
+        # Label d'information sur les paramètres de détection
+        self.info_label = QLabel()
+        self.info_label.setWordWrap(True)
+        self.info_label.setAlignment(Qt.AlignCenter)
+        self.update_info_label()  # Initialise le texte
+        self.info_label.setStyleSheet("""
+            QLabel {
+                background-color: #fff;
+                border-radius: 8px;
+                padding: 12px;
+                font-size: 12px;
+                color: #000;
+                border: 1px solid #000;
+            }
+        """)
+        layout.addWidget(self.info_label)
+        
         # Deuxième rangée : bouton de conversion
         self.convert_btn = QPushButton("Convertir en PowerPoint")
         self.convert_btn.setFixedHeight(50)
@@ -125,7 +152,7 @@ class MainWindow(QMainWindow):
         self.log_label = QLabel("")
         self.log_label.setWordWrap(True)
         self.log_label.setAlignment(Qt.AlignCenter)
-        self.log_label.setMinimumHeight(60)
+        self.log_label.setMinimumHeight(110)
         self.log_label.setStyleSheet("""
             QLabel {
                 background-color: #f8f9fa;
@@ -171,6 +198,60 @@ class MainWindow(QMainWindow):
 
         if getattr(sys, 'frozen', False):
             pyi_splash.close()
+    
+    def update_info_label(self):
+        """Met à jour le label d'information avec les paramètres actuels"""
+        self.info_label.setText(
+            f"ℹ️ Détection : Titres (police ≥ {int(self.headline_size)} pt) • Paragraphes (police < {int(self.headline_size)} pt)"
+        )
+    
+    def create_menu_bar(self):
+        """Crée la barre de menu"""
+        menubar = self.menuBar()
+        
+        # Menu Paramètres qui ouvre directement la boîte de dialogue
+        settings_action = menubar.addAction("Paramètres")
+        settings_action.triggered.connect(self.open_settings)
+    
+    def open_settings(self):
+        """Ouvre la boîte de dialogue des paramètres"""
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Paramètres")
+        dialog.setFixedSize(400, 150)
+        
+        # Layout du formulaire
+        layout = QFormLayout()
+        
+        # Champ pour la taille de police des titres
+        headline_spinbox = QSpinBox()
+        headline_spinbox.setMinimum(10)
+        headline_spinbox.setMaximum(50)
+        headline_spinbox.setValue(int(self.headline_size))
+        headline_spinbox.setSuffix(" pt")
+        headline_spinbox.setStyleSheet("""
+            QSpinBox {
+                padding: 5px;
+                font-size: 13px;
+                border: 1px solid #dadce0;
+                border-radius: 4px;
+            }
+        """)
+        
+        layout.addRow("Taille minimum police : Titre", headline_spinbox)
+        
+        # Boutons OK / Annuler
+        buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+        
+        dialog.setLayout(layout)
+        
+        # Si l'utilisateur clique sur OK, met à jour les paramètres
+        if dialog.exec_() == QDialog.Accepted:
+            self.headline_size = float(headline_spinbox.value())
+            self.settings.setValue("headline_size", self.headline_size)  # Sauvegarde
+            self.update_info_label()  # Met à jour le label d'information
     
     def update_button_states(self):
         """Met à jour l'état des boutons selon le contenu du champ de texte"""
@@ -226,7 +307,7 @@ class MainWindow(QMainWindow):
             output = io.StringIO()
             
             # Crée l'objet Powerpoint et effectue la conversion
-            self.pptx_obj = Powerpoint()
+            self.pptx_obj = to_powerpoint(self.headline_size)
             
             with redirect_stdout(output):
                 self.pptx_obj.open(file_path)
@@ -234,7 +315,7 @@ class MainWindow(QMainWindow):
             # Vérifie si l'ouverture a échoué
             open_output = output.getvalue()
             if "Fichier introuvable" in open_output or "Erreur inconnue" in open_output:
-                self.log_label.setText(f"❌ {open_output.strip()}")
+                self.log_label.setText(f"{open_output.strip()}")
                 self.log_label.setStyleSheet("""
                     QLabel {
                         background-color: #fce8e6;
@@ -264,7 +345,7 @@ class MainWindow(QMainWindow):
             """)
             self.update_button_states()  # Active le bouton Export
         except Exception as e:
-            self.log_label.setText(f"❌ Erreur lors de la conversion:\n{str(e)}")
+            self.log_label.setText(f"Erreur lors de la conversion:\n{str(e)}")
             self.log_label.setStyleSheet("""
                 QLabel {
                     background-color: #fce8e6;
@@ -331,7 +412,7 @@ class MainWindow(QMainWindow):
                     }
                 """)
             except Exception as e:
-                self.log_label.setText(f"❌ Erreur lors de l'exportation :\n{str(e)}")
+                self.log_label.setText(f"Erreur lors de l'exportation :\n{str(e)}")
                 self.log_label.setStyleSheet("""
                     QLabel {
                         background-color: #fce8e6;
