@@ -13,6 +13,9 @@ try:
 except ModuleNotFoundError:
     from convert import to_powerpoint
 
+if getattr(sys, 'frozen', False):
+    import pyi_splash
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
