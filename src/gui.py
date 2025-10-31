@@ -345,6 +345,8 @@ class MainWindow(QMainWindow):
             """)
             self.update_button_states()  # Active le bouton Export
         except Exception as e:
+            self.pptx_obj = None  # Réinitialise l'objet en cas d'erreur
+            self.export_btn.setEnabled(False)  # Désactive le bouton Export
             self.log_label.setText(f"Erreur lors de la conversion:\n{str(e)}")
             self.log_label.setStyleSheet("""
                 QLabel {
@@ -412,6 +414,8 @@ class MainWindow(QMainWindow):
                     }
                 """)
             except Exception as e:
+                self.pptx_obj = None  # Réinitialise l'objet en cas d'erreur
+                self.export_btn.setEnabled(False)  # Désactive le bouton Export
                 self.log_label.setText(f"Erreur lors de l'exportation :\n{str(e)}")
                 self.log_label.setStyleSheet("""
                     QLabel {
