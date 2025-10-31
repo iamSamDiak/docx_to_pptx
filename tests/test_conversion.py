@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Script de test pour la conversion DOCX -> PPTX
+Script de test pour la conversion EcoDim
 """
 
 import sys
@@ -15,7 +15,7 @@ from src.handlers import NoHeadlineError
 
 def test_conversion():
     """Test de conversion d'un document Word"""
-    print("=== Test de conversion DOCX -> PPTX ===\n")
+    print("=== Test de conversion EcoDim ===\n")
     
     # Chemin du fichier de test
     docx_file = os.path.join(os.path.dirname(__file__), "test - Copie.docx")

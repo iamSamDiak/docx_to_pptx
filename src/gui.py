@@ -195,6 +195,9 @@ class MainWindow(QMainWindow):
         
         # Variable pour stocker l'objet Powerpoint
         self.pptx_obj = None
+
+        if getattr(sys, 'frozen', False):
+            pyi_splash.close()
     
     def update_info_label(self):
         """Met à jour le label d'information avec les paramètres actuels"""
