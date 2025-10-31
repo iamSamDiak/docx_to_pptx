@@ -1,21 +1,21 @@
 [Setup]
-AppName=DOCX to PPTX Converter
+AppName=EcoDim Converter
 AppVersion=1.0.0
-DefaultDirName={pf}\DOCX to PPTX
-DefaultGroupName=DOCX to PPTX
+DefaultDirName={pf}\EcoDim
+DefaultGroupName=EcoDim
 OutputDir=installer
-OutputBaseFilename=DOCX_to_PPTX_Setup
+OutputBaseFilename=EcoDim_Setup
 Compression=lzma
 SolidCompression=yes
 SetupIconFile=assets\app.ico
 
 [Files]
-Source: "dist\DOCX to PPTX.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\EcoDim.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "assets\*"; DestDir: "{app}\assets"; Flags: ignoreversion recursesubdirs
 
 [Icons]
-Name: "{group}\DOCX to PPTX"; Filename: "{app}\DOCX to PPTX.exe"
-Name: "{commondesktop}\DOCX to PPTX"; Filename: "{app}\DOCX to PPTX.exe"
+Name: "{group}\EcoDim"; Filename: "{app}\EcoDim.exe"
+Name: "{commondesktop}\EcoDim"; Filename: "{app}\EcoDim.exe"
 
 [Run]
-Filename: "{app}\DOCX to PPTX.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\EcoDim.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent

@@ -1,6 +1,6 @@
-# DOCX to PPTX - Build Script
+# EcoDim - Build Script
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host " DOCX to PPTX - Build Script" -ForegroundColor Cyan
+Write-Host " EcoDim - Build Script" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -10,7 +10,7 @@ pip install pyinstaller
 Write-Host ""
 
 Write-Host "[2/4] Creation de l'executable..." -ForegroundColor Yellow
-pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=assets/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
+pyinstaller --onefile --windowed --name="EcoDim" --icon=assets/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
 Write-Host ""
 
 Write-Host "[3/4] Verification d'Inno Setup..." -ForegroundColor Yellow
@@ -28,6 +28,6 @@ Write-Host ""
 
 Write-Host "========================================" -ForegroundColor Green
 Write-Host " Build termine !" -ForegroundColor Green
-Write-Host " Installeur : installer\DOCX_to_PPTX_Setup.exe" -ForegroundColor Green
+Write-Host " Installeur : installer\EcoDim_Setup.exe" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
 Read-Host "Appuyez sur Entree pour continuer"

@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo  DOCX to PPTX - Build Script
+echo  EcoDim - Build Script
 echo ========================================
 echo.
 
@@ -10,7 +10,7 @@ pip install pyinstaller
 echo.
 
 echo [2/4] Creation de l'executable...
-pyinstaller --onefile --windowed --name="DOCX to PPTX" --icon=assets/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
+pyinstaller --onefile --windowed --name="EcoDim" --icon=assets/app.ico --collect-all PyQt5 --collect-all docx --collect-all pptx --collect-all lxml src/main.py
 echo.
 
 echo [3/4] Verification d'Inno Setup...
@@ -27,6 +27,6 @@ echo.
 
 echo ========================================
 echo  Build termine !
-echo  Installeur : installer\DOCX_to_PPTX_Setup.exe
+echo  Installeur : installer\EcoDim_Setup.exe
 echo ========================================
 pause
