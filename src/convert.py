@@ -6,10 +6,16 @@ from pptx.enum.text import PP_ALIGN
 from pptx.dml.color import RGBColor
 import re
 
-class Powerpoint:
-    def __init__(self):
+try:
+    from src.handlers import NoHeadlineError
+except ModuleNotFoundError:
+    from handlers import NoHeadlineError
+
+class to_powerpoint:
+    def __init__(self, headline_size=16.0):
         self.pptx = Presentation()
         self.paragraphs = []
+        self.headline_size = headline_size
 
     def open(self, path_of_docx):
         """ Ouvre un document Word """
@@ -31,7 +37,7 @@ class Powerpoint:
             return
         for i in self.document.paragraphs:
             size = [run.font.size / 12700 if run.font.size else None for run in i.runs]
-            is_headline = any(val is not None and val >= 16.0 for val in size)
+            is_headline = any(val is not None and val >= self.headline_size for val in size)
 
             """ Si le texte est un titre, crée un nouveau 'dict' """
             if is_headline:
@@ -64,7 +70,10 @@ class Powerpoint:
         """ Crée des slides par rapport aux textes """
         print("Conversion...")
         self.paragraphs = self.get_text()
-        #
+
+        if self.paragraphs[0]["headline"] == "":
+            raise NoHeadlineError(f"Aucun titre détecté dans le document Word. Veuillez ajouter des titres pour chaque section.\nRappel : Taille minimum des titres = {self.headline_size} pt (modifiable dans \"Paramètres\").")
+        
         for para in self.paragraphs:
             headline = para["headline"]
             # chunk

@@ -1,12 +1,15 @@
-from src.gui import MainWindow
+try:
+    from src.gui import MainWindow
+except ModuleNotFoundError:
+    from gui import MainWindow
 from PyQt5.QtWidgets import QApplication
 import sys
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
-    window.setWindowTitle(f"DOCX to PPTX Converter v{__version__}")
+    window.setWindowTitle(f"EcoDim v{__version__}")
     window.show()
     sys.exit(app.exec_())
